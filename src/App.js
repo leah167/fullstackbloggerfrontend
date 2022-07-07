@@ -1,5 +1,5 @@
 import "./App.css";
-import { Routes, Route, Link } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import BlogsPage from "./Pages/Blogs";
 import { useState, useEffect } from "react";
 
@@ -14,6 +14,7 @@ function App() {
       const apiResponse = await fetch(url);
       const apiJSON = await apiResponse.json();
       setServerJSON(apiJSON);
+      console.log("api", apiJSON);
       return;
     };
     fetchData();

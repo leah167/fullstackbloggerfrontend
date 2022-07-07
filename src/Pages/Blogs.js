@@ -1,4 +1,5 @@
 const BlogsPage = ({ blogs }) => {
+  console.log("blogs", blogs);
   return (
     <div className="blogs-page">
       <h1>Blogs Page</h1>
