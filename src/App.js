@@ -15,6 +15,7 @@ const App = () => {
   const [filterValue, setFilterValue] = useState("");
   const [limit, setLimit] = useState(Number(10));
   const [page, setPage] = useState(Number(1));
+  const [isFetching, setIsFetching] = useState(false);
 
   const blogSubmit = async (blog) => {
     // const url = urlEndpoint + "/blogs/blog-submit";
@@ -27,7 +28,7 @@ const App = () => {
       body: JSON.stringify(blog),
     });
     const responseJSON = await response.json();
-    // return responseJSON;
+    return responseJSON;
   };
   // useEffect(() => {
   //   const fetchData = async () => {
@@ -50,7 +51,7 @@ const App = () => {
       return;
     };
     fetchData();
-  }, [sortField, sortOrder, filterField, filterValue, limit, page]);
+  }, [sortField, sortOrder, filterField, filterValue, limit, page, isFetching]);
 
   return (
     <div className="App">
@@ -78,7 +79,12 @@ const App = () => {
           ></Route>
           <Route
             path="/post-blog"
-            element={<PostBlogPage blogSubmit={blogSubmit} />}
+            element={
+              <PostBlogPage
+                blogSubmit={blogSubmit}
+                setIsFetching={setIsFetching}
+              />
+            }
           ></Route>
         </Routes>
       </header>

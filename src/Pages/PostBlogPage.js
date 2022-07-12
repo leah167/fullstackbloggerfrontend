@@ -2,11 +2,12 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 // import blogSubmit from ".../App";
 
-const PostBlogPage = ({ blogSubmit }) => {
+const PostBlogPage = ({ blogSubmit, setIsFetching }) => {
   const [title, setTitle] = useState("");
   const [author, setAuthor] = useState("");
   const [text, setText] = useState("");
   const [category, setCategory] = useState("");
+  const [message, setMessage] = useState("");
   const navigate = useNavigate();
 
   return (
@@ -56,21 +57,34 @@ const PostBlogPage = ({ blogSubmit }) => {
           setText(newText);
         }}
       ></textarea>
+      &nbsp;
       <button
         id="submit"
         type="submit"
-        onClick={
-          ("click",
-          () => {
-            blogSubmit({
+        onClick={async () => {
+          if (!title || !text || !author || !category) {
+            let isTitle = title ? "" : "\n - Title";
+            let isText = text ? "" : "\n - Text";
+            let isAuthor = author ? "" : "\n - Author";
+            let isCategory = category ? "" : "\n - Category";
+            alert(
+              `Please enter missing field(s): ${isTitle} ${isText} ${isAuthor} ${isCategory}`
+            );
+          } else {
+            setIsFetching(true);
+            const { success, message } = await blogSubmit({
               title: title,
               author: author,
               category: category,
               text: text,
             });
-            navigate("/");
-          })
-        }
+            setIsFetching(false);
+            setMessage(message);
+            if (success === true) {
+              navigate("/");
+            }
+          }
+        }}
       >
         Submit
       </button>
