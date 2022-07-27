@@ -88,6 +88,7 @@ const PostBlogPage = ({ blogSubmit, setIsFetching }) => {
       >
         Submit
       </button>
+      <div>{message}</div>
     </div>
   );
 };

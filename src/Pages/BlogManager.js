@@ -77,13 +77,6 @@ const BlogManager = ({
         />
         <br />
         <br />
-        <label>Blog ID</label> &nbsp;
-        <input
-          type="text"
-          value={editBlogId}
-          onChange={(event) => setEditBlogId(event.target.value)}
-        />
-        <p>{editBlogId}</p>
       </Modal>
       {adminBlogList.map((blog) => {
         const fetchBlogAndShow = async () => {
@@ -104,11 +97,6 @@ const BlogManager = ({
           />
         );
       })}
-      {/* {adminBlogList.map((blog) => {
-         return (
-           <BlogManagerCard blog={blog} deleteBlog={deleteBlog} key={blog.id} />
-         );
-       })} */}
     </div>
   );
 };
